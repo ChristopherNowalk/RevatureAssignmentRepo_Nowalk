@@ -1,0 +1,10 @@
+
+public class MultiDimensionalArrays {
+	public static void main(String[] args)
+	{
+		int[][][] my3DArray = new int[3][3][3];
+		
+		my3DArray[0][0][0] = 1;
+		System.out.println(my3DArray[0][0][0]);
+	}
+}

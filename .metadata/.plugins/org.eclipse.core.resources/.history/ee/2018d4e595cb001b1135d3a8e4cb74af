@@ -1,0 +1,18 @@
+package main;
+//importing the scanner class
+import java.util.Scanner;
+
+public class Converter {
+	public static void main(String[] args) {
+		int menuSelection = 0;
+		//array of string options to print out, the index will be 
+		
+		String[] selections = {"1. Gallons to Liters", "2. USD to CAD", "3. Feet to Miles", "4. Quit" };
+		for(String option : selections) {
+			System.out.println(option);
+		}
+		while(menuSelection != selections.length) {
+			
+		}
+	}
+}
