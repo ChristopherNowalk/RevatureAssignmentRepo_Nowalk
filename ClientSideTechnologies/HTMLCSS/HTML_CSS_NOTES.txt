@@ -1,0 +1,27 @@
+----------------------------------
+Client Side Technologies
+
+Client = computer that is using/running an application
+Server = providing data/services/resources to the Client
+
+
+
+----------------------------------
+HTML
+----------------------------------
+
+Hyper Text Markup Language
+
+-not a programming Language
+-it's a markup language
+    -this means that it tells us how a document should look when viewed.
+
+Purpose of HTML - display information and content to a web page.
+
+.html = the file extension tells the browser to interpret and parse the characters to create a webpage.
+
+HTML contains/uses a prarticular syntax (elements and attributes)
+
+-------------------------------------
+
+Elements - core building blocks of a web page

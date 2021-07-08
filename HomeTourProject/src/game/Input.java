@@ -5,7 +5,7 @@ import fixtures.Fixture;
 import fixtures.Room;
 
 public class Input {
-	
+	//find a way to close the scanner because there is a bit of a memory problem here
 	public String[] getInput() {
 		//create our scanner
 		Scanner s = new Scanner(System.in);

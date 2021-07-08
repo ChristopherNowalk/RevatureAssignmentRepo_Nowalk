@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<typeInfoHistroy/>
+<typeInfoHistroy>
+    <typeInfo handle="=MovieApp/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.services{MovieService.java[MovieService" modifiers="513" timestamp="1625156081318"/>
+    <typeInfo handle="=MovieApp/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.repositories{MovieRepo.java[MovieRepo" modifiers="513" timestamp="1625089780077"/>
+    <typeInfo handle="=BankingAPI_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.services{UserServices.java[UserServices" modifiers="513" timestamp="1625617232235"/>
+    <typeInfo handle="=BankingAPI_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.services{AccountServices.java[AccountServices" modifiers="513" timestamp="1625516533639"/>
+    <typeInfo handle="=BankingAPI_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.repositories{UserRepo.java[UserRepo" modifiers="513" timestamp="1625511327578"/>
+    <typeInfo handle="=BankingAPI_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.repositories{AccountRepo.java[AccountRepo" modifiers="513" timestamp="1625675153647"/>
+</typeInfoHistroy>
