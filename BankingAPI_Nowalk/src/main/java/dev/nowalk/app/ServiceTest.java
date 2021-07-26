@@ -18,12 +18,12 @@ public class ServiceTest {
 		
 		UserServices us = new UserServicesImpl(ur, ar);	
 		
-		Account a = new Account("roth ira", 10000.00, 1);
+		//Account a = new Account("roth ira", 10000.00, 1);
 		//not using account services
 		//AccountServices as = new AccountServicesImpl();
 		List<Account> accounts = ar.getAllAccounts();
 		System.out.println(accounts);
-		System.out.println(us.addAccountToUser(a, 1));
+		//System.out.println(us.addAccountToUser(a, 1));
 		//this fails below because we are searching through the array list of accounts in a user, and it thinks the id is the index, which 
 		//it most definitely is not the index of the account in the array list. we can either change the data structure or find a way
 		//around the issue

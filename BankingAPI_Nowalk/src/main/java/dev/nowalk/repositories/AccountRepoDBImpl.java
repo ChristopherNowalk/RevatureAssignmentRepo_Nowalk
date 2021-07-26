@@ -66,6 +66,7 @@ public class AccountRepoDBImpl implements AccountRepo {
 			
 			ps.setString(1, a.getType());
 			ps.setDouble(2, a.getBalance());
+			//ps.setInt(3, a.getUserId());
 			ps.setInt(3, userId);
 			
 			ResultSet rs = ps.executeQuery();

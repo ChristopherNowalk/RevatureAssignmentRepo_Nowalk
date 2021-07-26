@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <title>DOM Manipulation - Event Listeners</title>
+</head>
+
+<body>
+    
+    <h1 id="person" draggable="true">Hello, My Name is Chris!</h1>
+
+    
+    <h1 onclick="this.innerHTML = 'Inline Change'">We can change the DOM with Inline JS</h1>
+    <h1 id="internal">We can change the Dom with Internal JS</h1>
+    <h1 id="external">We can change the DOM with External JS</h1>
+
+    <h1 onclick="internalFunc(this)">We can change the DOM with Internal JS through an event handler attribute</h1>
+    <h1 onclick="externalFunc(this)">We can change the DOM with External JS through an event handler attribute</h1>
+
+</body>
+<script>
+    //This is recognized as JS Code.
+
+
+
+    //Grab the element
+    let chris = document.getElementById("person");
+
+    chris.addEventListener("click", () => { chris.innerHTML = "Hello, My Name is Abby!"; console.log(this.event.type) });
+    chris.addEventListener("mouseover", changeColor );
+
+    chris.onmouseout = () => {
+        chris.style.backgroundColor = "white";
+    }
+
+    //bonus fun
+    chris.ondrag = () => {
+        chris.style.color = "red";
+    }
+    chris.ondragend = () => {
+        chris.style.color = "black";
+    }
+
+
+    function changeColor() {
+        //JS uses camel casing -> backgorundColor
+        //CSS uses kebab -> background-color
+        chris.style.backgroundColor = "lightblue";
+    }
+
+    //-----------------------------------------------------------
+
+    //internal JS
+    let internalElement = document.getElementById("internal");
+    internalElement.onclick = () => {
+        internalElement.innerHTML = "Internal Change";
+    }
+
+    function internalFunc(element) {
+        element.innerHTML = "Internal Change with onclick attribute";
+    }
+
+
+</script>
+<script src="manipulation.js"></script>
+</html>

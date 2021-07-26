@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Employee Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="employeePortal.css">
+</head>
+
+<body>
+    <div>
+        <button onclick="location.href='trmsHome.html'" id="homeButton">TRMS Home</button>
+    </div>
+    <div>
+        <h1>Employee Portal</h1>
+        <h3 id="currentE">Current User: </h3>
+    </div><br>
+    <hr><br>
+    <div>
+        <h3 id="emTableTitle">Employee Information</h3>
+        <table id="Employee Table" class="table">
+            <thead id="employeeTHead">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Department Head</th>
+                    <th>Supervisor</th>
+                    <th>Benefits Coordinator</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="nameValue">-</td>
+                    <td id="emailValue">-</td>
+                    <td id="depValue">-</td>
+                    <td id="depHeadValue">-</td>
+                    <td id="superValue">-</td>
+                    <td id="bencoValue">-</td>
+                </tr>
+            
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div>
+        <button onclick="openNewRequest()" id="requestButton">New Request</button>
+        <button onclick="buildRequestTable(requests)" id="updateButton">Get All Requests</button>
+        <h3 id="reqTableTitle">Your Requests</h3>
+        <table id="requestTable" class="table">
+            <thead id="requestTHead">
+                <tr>
+                    <th>Request ID</th>
+                    <th>BenCo Approval</th>
+                    <th>Dep. Head Approval</th>
+                    <th>Supervisor Approval</th>
+                    <th>Is Urgent</th>
+                    <th>Event</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div>
+        <h3 id="approvalTableTitle">Requests to Approve</h3>
+        <button id="getRequestApprovals" onclick="buildApprovalTable()">Get Approvals</button>
+        <table id="approvalTable" class="table">
+            <thead id="approvalTHead">
+                <tr>
+                    <th>Request ID</th>
+                    <th>Employee</th>
+                    <th>View Request</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--Will fill in this void with data from all of the requests the employee needs to approve-->
+            </tbody>
+        </table>
+    </div>
+
+    <div id="modal">
+        <div id="modal-content">
+            <h3 id="modalTitle">Make a new request</h3>
+            <div type="dropdown" id="dropdown">
+                <!--<button onclick="dropDown()" type="dropbutton" id="eventButton">Events</button> -->
+                <select name="event" id="event">
+                    <option value="" selected="selected">Select Event</option>
+                </select>
+                <button onclick="newEvent('newEvent.html')" id="newEventButton">New Event</button>
+            </div>
+            <div id="close">+</div>
+            <!--<input type="text" id="event" placeholder="Event...">-->
+            <!--<input type="text" id="description" placeholder="Description...">-->
+            <textarea id="description" placeholder="Description..." rows="6"></textarea>
+            <button id="reqSubmitButton" onclick="submitNewRequest()">Submit</button>
+        </div>
+    </div>
+</body>
+
+<script>
+    //event listeners to perform actions when the page is loaded
+    window.addEventListener("load", changeEmployee);
+    window.addEventListener("load", getEmployeeByName);
+    window.addEventListener("load", showEmployeeInfo);
+    //window.addEventListener("load", buildRequestTable);
+    //window.addEventListener("load", showRequestInfo);
+    window.addEventListener("load", dropDown);
+
+
+    //variables
+    let employeeName = localStorage.getItem("employee");
+    let element = document.getElementById("currentE");
+    let curEmployee;
+    let department;
+    let departmentHead;
+    let benco;
+    let supervisor;
+    let requests = [];
+    let approvalRequests = [];
+    let employeesSupervised = [];
+    let events = [];
+
+    //functions, need to organize these better
+    function changeEmployee() {
+        element.innerHTML = "Current User: " + employeeName;
+    }
+
+    function getEmployeeByName(name) {
+        console.log("getting employee");
+        
+        let ename = name;
+        let employee;
+        console.log(ename);
+
+        let xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if(this.readyState == 4 & this.status == 200) {
+                console.log(this.response);
+
+                employee = JSON.parse(this.response);
+                //populateResult(employee);
+                console.log(employee);
+            }
+     
+        };
+
+        url = `http://localhost:7000/employees/search?name=${ename}`;
+        xhr.open("GET", url, false);
+
+        xhr.send();
+        return employee;
+    }
+
+    function getEmployeeByID(eId) {
+        console.log("getting employee");
+
+        let xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if(this.readyState == 4 & this.status == 200) {
+                console.log(this.response);
+
+                employee = JSON.parse(this.response);
+                console.log(employee);
+            }
+     
+        };
+
+        url = `http://localhost:7000/employees/${eId}`;
+        xhr.open("GET", url, false);
+
+        xhr.send();
+        return employee;
+    }
+
+    function getAllEvents() {
+        let xhr = new XMLHttpRequest();
+        let event;
+        xhr.onreadystatechange = function() {
+            if(this.readyState == 4 & this.status == 200) {
+                console.log(this.response);
+                event = JSON.parse(this.response);
+                console.log(event);
+            }
+        };
+
+        url = `http://localhost:7000/events`;
+        xhr.open("GET", url, false);
+        xhr.send();
+        return event;
+    }
+
+    function getEventByName(eventName) {
+        let xhr = new XMLHttpRequest();
+        let event;
+        xhr.onreadystatechange = function() {
+            if(this.readyState == 4 & this.status == 200) {
+                console.log(this.response);
+                event = JSON.parse(this.response);
+                console.log(event);
+            }
+        };
+
+        url = `http://localhost:7000/events/${eventName}`;
+        xhr.open("GET", url, false);
+        xhr.send();
+        event = JSON.stringify(event);
+        return event;
+    }
+
+    //display all of the employee info that is pertinent on the employee table
+    function showEmployeeInfo() {
+        curEmployee = getEmployeeByName(employeeName);
+        departmentHead = getEmployeeByID(curEmployee.dep.dep_head_id);
+        benco = getEmployeeByID(curEmployee.ben_co_id);
+        supervisor = getEmployeeByID(curEmployee.super_id);
+        document.getElementById("nameValue").innerHTML = curEmployee.name;
+        document.getElementById("emailValue").innerHTML = curEmployee.email;
+        document.getElementById("depValue").innerHTML = curEmployee.dep.name;
+        document.getElementById("depHeadValue").innerHTML = departmentHead.name;
+        document.getElementById("superValue").innerHTML = supervisor.name;
+        document.getElementById("bencoValue").innerHTML = benco.name;
+
+    }
+
+    //building a dynamic table
+    function buildRequestTable() {
+        let table = document.getElementById("requestTable");
+        requests = getAllRequests(curEmployee.e_id);
+        //helper function
+        function addCell(tr, text) {
+            let td = tr.insertCell();
+            td.textContent = text;
+            return td;
+        }
+        //i should probably delete all of the cells in there previously if there are some, as to refresh the table
+        //insert data
+        requests.forEach(function (item) {
+            let row = table.insertRow();
+            addCell(row, item.req_id);
+            addCell(row, item.ben_co_approval);
+            addCell(row, item.dep_head_approval);
+            addCell(row, item.super_approval);
+            addCell(row, item.is_urgent);
+            addCell(row, item.event.event_name);
+        });
+    }
+
+    function buildApprovalTable() {
+        let table = document.getElementById("approvalTable");
+        curEmployee = getEmployeeByName(employeeName);
+        employeesSupervised = getAllEmployeesUnderSuper(curEmployee.e_id);
+        console.log(employeesSupervised);
+        // for(let i = 0; i < employeesSupervised.length; i++) {
+        //     approvalRequests.push(getAllRequests(employeesSupervised[i].e_id));
+        // }
+        // // employeesSupervised.forEach(function (employee) {
+        // //     approvalRequests.push(getAllRequests(employee.e_id))
+        // // });
+        // console.log(approvalRequests);
+        function addCell(tr, text) {
+            let td = tr.insertCell();
+            td.textContent = text;
+            return td;
+        }
+
+        //insert data
+        employeesSupervised.forEach(function (item) {
+            //another for each to get the requests each employee has
+            item.requests.forEach(function (request) {
+            let row = table.insertRow();
+            //get the request id from the second for each loop
+            addCell(row, request.req_id);
+            //get the employee items name
+            addCell(row, item.name);
+            //now we add the button to view the request
+            row.insertCell(2).innerHTML = `<input id="viewButton" type="button" value="view" onclick="viewRequest(${request.req_id});">`;
+            });
+        });
+
+    }
+
+    function viewRequest(rID) {
+        //now we must view the request we have
+        console.log(rID);
+        //request = the req_id of each request
+        //we can now use this id to get that request and view it
+        //let request = getRequestById(rID);
+        localStorage.setItem("requestID", rID);
+        location.href = "viewRequest.html";
+
+    }
+
+    function getAllEmployeesUnderSuper(superID) {
+        let xhr = new XMLHttpRequest();
+        let employees;
+        xhr.onreadystatechange = function () {
+            if(this.readyState == 4 & this.status == 200) {
+                employees = JSON.parse(this.response);
+                console.log(employees);
+            }
+        };
+
+        url = `http://localhost:7000/employees/${superID}/supervisors`;
+        xhr.open("GET", url, false);
+        xhr.send();
+        return employees;
+    }
+
+    function getAllRequestsByEmployee(eID) {
+        let xhr = new XMLHttpRequest();
+        let requestsByEmployee;
+        xhr.onreadystatechange = function () {
+            if(this.readyState == 4 & this.status == 200) {
+                requestsByEmployee = JSON.parse(this.response);
+                console.log(requestsByEmployee);
+            }
+        };
+
+        url = `http://localhost:7000/requests/employees/${eID}`;
+        xhr.open("GET", url, false);
+        xhr.send();
+        return requestsByEmployee;
+    }
+    // function showRequestInfo() {
+    //     getEmployeeByName();
+    //     getAllRequests(curEmployee.e_id);
+
+    //     document.getElementById("reqIDValue").innerHTML = requests[0].req_id;
+    //     document.getElementById("bcApprovalValue").innerHTML = requests[0].ben_co_approval;
+    //     document.getElementById("dhApprovalValue").innerHTML = requests[0].dep_head_approval;
+    //     document.getElementById("superApprovalValue").innerHTML = requests[0].super_approval;
+    //     document.getElementById("isUrgentValue").innerHTML = requests[0].is_urgent;
+    //     document.getElementById("eventValue").innerHTML = requests[0].event.event_name;
+    // }
+
+    //get request by id
+    function getRequestById(rID) {
+        let xhr = new XMLHttpRequest();
+        let request;
+        xhr.onreadystatechange = function () {
+            if(this.readyState == 4 & this.status == 200) {
+                request = JSON.parse(this.response);
+            }
+        };  
+        url = `http://localhost:7000/requests/${rID}`;
+            xhr.open("GET", url, false);
+            xhr.send();
+            return request;
+    }
+
+    //get all of the requests for the employee
+    function getAllRequests(eId) {
+        let xhr = new XMLHttpRequest();
+        let request;
+        xhr.onreadystatechange = function () {
+            if(this.readyState == 4 & this.status == 200) {
+                console.log(this.response);
+
+                request = JSON.parse(this.response);
+                requests = request;
+            }
+        };
+
+        url =`http://localhost:7000/requests/employees/${eId}`;
+        xhr.open("GET", url, false);
+
+        xhr.send();
+        return requests;
+    }
+    //open new request window
+    function openNewRequest() {
+        document.querySelector("#modal").style.display = 'flex';
+    }
+
+    //i need to make a change to submitting a new request on the back end, it should all be in one method
+    //making a request object in one call and then submitting it in another is silly
+    function submitNewRequest() {
+        let xhr = new XMLHttpRequest();
+        let request;
+        let e = document.getElementById("event");
+        let selected = e.options[e.selectedIndex].text;
+        selectedEvent = getEventByName(selected);
+        request = JSON.stringify(`{"ben_co_approval":false, "dep_head_approval":false, "is_urgent":false, "super_approval":false,
+        "message":"${document.getElementById("description").value}", "event":${selectedEvent}}`); 
+        requestJSON = JSON.parse(request);
+        console.log(requestJSON);
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 & this.status == 200) {
+                console.log(this.response);
+
+                console.log(requestJSON);
+            }
+        };
+
+        url = `http://localhost:7000/employees/${curEmployee.name}/requests`;
+        xhr.open("POST", url, false);
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.send(requestJSON);
+    }
+
+    document.querySelector("#close").addEventListener('click', function () {
+
+        document.querySelector('#modal').style.display = 'none';
+    });
+
+    function dropDown() {
+        events = getAllEvents();
+        let eventSel = document.getElementById("event");
+        for(let i in events) {
+            eventSel.options[eventSel.options.length] = new Option(events[i].event_name, events[i]);
+        }
+    }
+
+    function newEvent(href) {
+        location.href=href;
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>View Request</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="employeePortal.css">
+
+</head>
+<body>
+    <div>
+        <button onclick="location.href='trmsHome.html'" id="homeButton">TRMS Home</button>
+    </div>
+    <div>
+        <button onclick="location.href='employeePortal.html'" id="portalButton">Employee Portal</button>
+    </div>
+    <h1>View Request Page</h1>
+    <h3 id="currentE">Current User: </h3>
+    <hr>
+    <br>
+    <div class="center">
+        <button onclick="updateRequest(requestID)">Submit Changes</button>
+    </div>
+    <br>
+    <table id="requestTable" class="table">
+        <thead id="requestTHead">
+            <tr>
+                <th>Employee</th>
+                <th>BenCo Approval</th>
+                <th>Dep. Head Approval</th>
+                <th>Supervisor Approval</th>
+                <th>Is Urgent</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="employeeName">-</td>
+                <td id="bcApprovalValue">-</td>
+                <td id="dhApprovalValue">-</td>
+                <td id="superApprovalValue">-</td>
+                <td id="isUrgentValue">-</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <h4 id="eventTitle">Event Title</h4>
+    <p id="eventInfo">
+        Event Description:
+    </p>
+    <br>
+
+</body>
+
+<script>
+    window.addEventListener("load", showRequestInfo);
+    window.addEventListener("load", changeEmployee);
+    //getting ready for some javascript
+    //variables
+    let requestID = localStorage.getItem("requestID");
+    let userName = localStorage.getItem("employee");
+    //let employeeName = localStorage.getItem("requestEmployee");
+    let element = document.getElementById("currentE");
+    console.log(requestID);
+    let request;
+    let employee;
+    let curEmployee = getEmployeeByName(userName);
+
+    //change the text at the top to show what the user is
+    function changeEmployee() {
+        element.innerHTML = "Current User: " + userName;
+    }
+    //get request by id
+    function getRequestById(rID) {
+        let xhr = new XMLHttpRequest();
+        let request;
+        xhr.onreadystatechange = function () {
+            if(this.readyState == 4 & this.status == 200) {
+                request = JSON.parse(this.response);
+            }
+        };  
+        url = `http://localhost:7000/requests/${rID}`;
+            xhr.open("GET", url, false);
+            xhr.send();
+            return request;
+    }
+
+    function getEmployeeByRequestID(rID) {
+        let xhr = new XMLHttpRequest();
+        let employee;
+        xhr.onreadystatechange = function () {
+            if(this.readyState == 4 & this.status == 200) {
+                employee = JSON.parse(this.response);
+            }
+        };  
+        url = `http://localhost:7000/employees/requests/${rID}`;
+            xhr.open("GET", url, false);
+            xhr.send();
+            return employee;
+
+    }
+
+    function getEmployeeByName(name) {
+        console.log("getting employee");
+        
+        let ename = name;
+        let em;
+        console.log(ename);
+
+        let xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if(this.readyState == 4 & this.status == 200) {
+                console.log(this.response);
+
+                em = JSON.parse(this.response);
+                //populateResult(employee);
+                console.log(em);
+            }
+     
+        };
+
+        url = `http://localhost:7000/employees/search?name=${ename}`;
+        xhr.open("GET", url, false);
+
+        xhr.send();
+        return em;
+    }
+    //TODO: I need to make the approval sections changable
+    //this function is definitely not ready, gotta work on the patch option here
+    //I also need to grab the employee name or id who submitted this request
+    function updateRequest(rID) {
+        let xhr = new XMLHttpRequest();
+        let request;
+        xhr.onreadystatechange = function () {
+            if(this.readyState == 4 & this.status == 200) {
+                request = JSON.parse(this.response);
+            }
+        }; 
+        //this url will be for the set '' approval, if the employee which goes here can approve certain criteria
+        //they should be given the option of doing so 
+        url = `http://localhost:7000/requests/${rID}`;
+            xhr.open("PUT", url, false);
+            //add a body to the send function with the new request object in it, with the correctly formatted JSON
+            xhr.send();
+    }
+
+    //TODO: make the selection of a new approval value change the value of the JSON object representing the request
+    //once the request is changed, make the submit button submit the new value and update the request in the db
+    function showRequestInfo() {
+        request = getRequestById(requestID);
+        console.log(request);
+        employee = getEmployeeByRequestID(requestID);
+        document.getElementById("employeeName").innerHTML = employee.name;
+        document.getElementById("bcApprovalValue").innerHTML = request.ben_co_approval;
+        if(curEmployee.e_id == employee.ben_co_id) {
+            //add a drop down bar to be able to change the value
+            document.getElementById("bcApprovalValue").innerHTML = `<select name="bcApproval" id="bcApproval"><option value="${request.ben_co_approval}" selected="selected">${request.ben_co_approval}</option></select>`;
+            if(request.ben_co_approval == false) {
+                let el = document.getElementById("bcApproval");
+                el.options[el.options.length] = new Option("true", "true");
+            }
+        }
+        document.getElementById("dhApprovalValue").innerHTML = request.dep_head_approval;
+        if(curEmployee.e_id == employee.dep.dep_head_id) {
+            //add a drop down bar to be able to change the value
+            document.getElementById("dhApprovalValue").innerHTML = `<select name="dhApproval" id="dhApproval"><option value="${request.dep_head_approval}" selected="selected">${request.dep_head_approval}</option></select>`;
+            if(request.dep_head_approval == false) {
+                let el = document.getElementById("dhApproval");
+                el.options[el.options.length] = new Option("true", "true");
+            }
+        }
+        document.getElementById("superApprovalValue").innerHTML = request.super_approval;
+        if(curEmployee.e_id == employee.super_id) {
+            //add a drop down bar to be able to change the value
+            document.getElementById("superApprovalValue").innerHTML = `<select name="superApproval" id="superApproval"><option value="${request.super_approval}" selected="selected">${request.super_approval}</option></select>`;
+            if(request.super_approval == false) {
+                let el = document.getElementById("superApproval");
+                el.options[el.options.length] = new Option("true", "true");
+            }
+        }
+        document.getElementById("isUrgentValue").innerHTML = request.is_urgent;
+        document.getElementById("eventTitle").innerHTML = request.event.event_name;
+        document.getElementById("eventInfo").innerHTML = request.event.description;
+    }
+</script>
+
+</html>

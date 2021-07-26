@@ -28,10 +28,10 @@ public class AccountRepoImpl implements AccountRepo {
 	}
 
 	@Override
-	public Account addAccount(Account a, int userId) {
+	public Account addAccount(Account a, int id) {
 		//setting the id of the new account to something unique
 		a.setId(FakeDB.accountIdCount++);
-		a.setUserId(userId);
+		//a.setUserId(userId);
 		FakeDB.accounts.put(a.getId(), a);
 		return a;
 	}

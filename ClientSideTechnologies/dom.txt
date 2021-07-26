@@ -1,0 +1,49 @@
+DOM - Document Object Model
+
+    -It is a way to present an HTML page as a series of connected nodes.
+    We can reference the DOM in JavaScript through the 'document' object.
+
+    -Manipulating the DOM is th reason JavaScript was created.
+        -Makes we pages dynamic
+
+-DOM Manipulation is just the process of changing what is displayed on our web page
+-This manipulation typically occurs when the user interact with the webpage.
+
+Event
+    -An Event is a user action or anything that happens to occur on the web page.
+        -Ex: click, mouseover, mouseout, focus, blur, load (there are tons of events, this is just a very small sample of some)
+
+Event Listener / Handler
+    -It will listen for an event to occur on a specific element and it 'fires/triggers' a function to occur.
+        -The function that is triggered is called the Action.
+
+        -*Note: in JavaScript we will namely refer to Event Listeners; however, in a deeper conversation we can break this down into two terms:
+            -Listener: responsible for waiting (Listening) for an event to occur
+            -Handler: responsible for making an Action occur.
+
+            -working in combination, they can make an action occur upon an event happening.
+
+
+2 steps to creating an event Listener
+
+    -retrieve the element from the web page, accessed via the DOM (Document Object Model), called 'document' in JS.
+        -let element = document.getElementById("myId");
+
+
+    -Add an event listener to the element 
+        - element.addEventListener(event, action, capture?)
+        - element.addEventListener(event, action)
+
+
+----------------------------------------------------------------------------------------------
+
+Bubbling vs Capturing
+
+Bubbling - is when an event listener executes from the innermost element to the outermost element.
+    Moreover, it means we would like the specific action to trigger when our application 'leaves' that element.
+    This is the default for essentiall all browsers.
+
+Capturing - is when an event listener executes from the outermost element to the innermost element.
+    Moreover, it means we would like the specific action to trigger when our application first 'enters' that element.
+
+    

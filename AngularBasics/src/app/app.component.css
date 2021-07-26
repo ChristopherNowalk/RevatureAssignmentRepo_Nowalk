@@ -1,0 +1,17 @@
+h3 {
+    background-color: lightcyan;
+}
+
+table {
+    border: 2px dashed navy;
+}
+
+th {
+    border: 1px solid darkgrey;
+    background-color: lightgray;
+}
+
+td {
+    border: 1px solid grey;
+    background-color: whitesmoke;
+}

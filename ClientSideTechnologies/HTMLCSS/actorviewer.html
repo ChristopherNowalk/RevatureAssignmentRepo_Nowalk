@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Actor Viewer</title>
+</head>
+
+
+<body>
+ 
+    <h3>Actor Viewer By ID</h3>
+    <input id="aid" type="number">
+
+    <button onclick="getActor()">Get Actor</button>
+    <button onclick="removeProperty()">Remove Property</button>
+    <p id="result"></p>
+
+</body>
+
+<script>
+
+    function getActor() {
+
+        console.log("Getting Actor");
+
+        let aid = document.getElementById("aid").value;
+
+        console.log(aid);
+
+        let xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function() {
+
+            if(this.readyState == 4 && this.status == 200) {
+
+                console.log(this.responseText);
+
+                let actor = JSON.parse(this.responseText);
+
+                populateResult(actor);
+                // let info = 
+                // `<h3>ID: ${actor.id}</h3>
+                // <h3>Name: ${actor.name}</h3>
+                // <h3>Age: ${actor.age}</h3>
+                // <h3>Worth: ${actor.worth}</h3>`;
+
+                // document.getElementById("result").innerHTML = info;
+            }
+
+        };
+
+        url = "http://localhost:7000/actors/" + aid;
+        xhr.open("GET", url, true);
+        
+        xhr.send();
+
+    }
+
+    //here we are dynamically creating the elements which we want to display on our webpage
+    function populateResult(actor) {
+
+        let result = document.getElementById("result");
+        result.innerHTML = "";
+
+        let idNode = document.createElement("h3");
+        let nameNode = document.createElement("h3");
+        let ageNode = document.createElement("h3");
+        let worthNode = document.createElement("h3");
+
+        idNode.innerHTML = "ID: " + actor.id;
+        nameNode.innerHTML = "Name: " + actor.name;
+        //another approach
+        let ageText = document.createTextNode("Age: " + actor.age);
+        let worthText = document.createTextNode("Worth: " + actor.worth);
+        ageNode.appendChild(ageText);
+        worthNode.appendChild(worthText);
+
+        result.appendChild(idNode);
+        result.appendChild(nameNode);
+        result.appendChild(ageNode);
+        result.appendChild(worthNode);
+
+    }
+
+    function removeProperty() {
+
+        let result = document.getElementById("result");
+
+        if (result.hasChildNodes) {
+            result.removeChild(result.childNodes[0]);
+            //result.remove(result.lastChild);
+        }
+
+    }
+
+</script>
+
+</html>

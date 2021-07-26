@@ -46,15 +46,14 @@ public class UserServicesImpl implements UserServices {
 	}
 
 	//this one I will have to think about a little bit
-	@Override
-	public Account addAccountToUser(Account a, int userId) {	
-		a.setUserId(userId);
-		ar.addAccount(a, userId);
-		//User u = this.getUser(userId);
-		//u.setAccount(a);
-		//ur.updateUser(u);
-		return a;
-	}
+//	@Override
+//	public Account addAccountToUser(Account a) {	
+//		//a.setUserId(userId);
+//		return ar.addAccount(a);
+//		//User u = this.getUser(userId);
+//		//u.setAccount(a);
+//		//ur.updateUser(u);
+//	}
 	
 	@Override
 	public Account deleteAccountFromUser(int id, int userId) {
@@ -117,6 +116,44 @@ public class UserServicesImpl implements UserServices {
 		return null;
 	}
 
+	@Override
+	public List<Account> getAllAccounts() {
+		return ar.getAllAccounts();		
+	}
 	
+	@Override
+	public Account getAccountById(int id) {
+		return ar.getAccount(id);
+	}
 	
+	@Override
+	public Account getAccountFromUser(int id, int userId) {
+		List<Account> accounts = ar.getAllAccounts();
+		//look through the list of accounts return the account we are looking for
+		for(int i = 0; i <= accounts.size() - 1; i++) {
+			Account a = accounts.get(i);
+			if(a.getUserId() == userId & a.getId() == id) {
+				return a;
+			}
+		} 
+		return null;
+	}	
+	
+	@Override
+	public List<Account> getAllAccountsByUserId(int userId){
+		List<Account> accounts = ar.getAllAccounts();
+		//look through the list of accounts and remove those which don't have the userId or the id of the acc we are looking for
+		for(int i = 0; i < accounts.size() - 1; i++) {
+			Account a = accounts.get(i);
+			if(a.getUserId() != userId) {
+				accounts.remove(i);
+			}
+		}
+		//return null if there are no accounts for that user
+		if(accounts.isEmpty()) {
+			return null;
+		} else {
+			return accounts;
+		}
+	}
 }

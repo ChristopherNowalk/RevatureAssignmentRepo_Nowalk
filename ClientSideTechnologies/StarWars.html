@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     
+    <title>Star Wars API Call</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+
+<body>
+    
+    <h1>Star Wars</h1>
+    <button onclick="getCharacter()">Get Character</button>
+
+    <!-- <p id="response"></p> -->
+
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Character Info</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Name</td>
+                <td id="name">-</td>
+            </tr>
+            <tr>
+                <td>Height</td>
+                <td id="height">-</td>
+            </tr>
+            <tr>
+                <td>Mass</td>
+                <td id="mass">-</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</body>
+
+<script>
+
+    function getCharacter() {
+
+        console.log("Getting Character");
+
+        //step 1
+        let xhttp = new XMLHttpRequest();
+
+        //step 2
+        xhttp.onreadystatechange = function () {
+
+            console.log("Current Ready State: " + this.readyState);
+
+            if(this.readyState == 4 && this.status == 200) {
+                //We have a successful and completed request and can now process the response
+                console.log("Successful Call");
+
+                console.log(this.responseText);
+
+                //JSON.parse converts a JSON into a JS object
+                let character = JSON.parse(this.responseText);
+                console.log(character);
+                //now we can look for fields and values in the JS object like character.name
+                console.log(character.name);
+
+                // let reply = 
+                // // "Name: " + character.name +
+                // // "<br>Height: " + character.height +
+                // // "<br>Mass: " + character.mass;
+                // //this below is called the Template Literal syntax
+                // `Name: ${character.name}
+                // <br>Height: ${character.height}
+                // <br>Mass: ${character.mass}`;
+                
+                // document.getElementById("response").innerHTML = reply;
+
+                document.getElementById("name").innerHTML = character.name;
+                document.getElementById("height").innerHTML = character.height;
+                document.getElementById("mass").innerHTML = character.mass;
+
+
+            } else if(this.readyState == 4) {
+                //if there were a reason when we don't get a 200 back, we get a status code printout 
+                console.log("Status Code: " + this.status);
+            }
+
+        }
+
+        //this is a little math fun to generate a random integers between 1 and 82, for some fun
+        let randomNum = Math.floor(Math.random() * 82 + 1);
+
+        let url = `https://swapi.dev/api/people/${randomNum}?format=json`;
+
+        //step 3
+        xhttp.open("GET", url, true);
+
+        //step 4
+        xhttp.send();
+
+
+
+    }
+
+</script>
+
+</html>

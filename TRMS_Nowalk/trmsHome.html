@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>TRMS_Nowalk</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="trmsHome.css">
+</head>
+
+
+<body>
+    <div>
+        <h1>Tuition Reimbursement Management System</h1>
+        <br>
+        <br>
+        <h4>Sign In</h4>
+        <hr>
+        <p>Name</p>
+        <input type="text" id="ename" placeholder="name...">
+        <!--
+        <p>Password</p>
+        <input type="text" id="epass" placeholder="password...">
+        So this button works, it brings us to the employee portal and is successfully calls get employee-->
+        <!--however it does not save data and it will go to the employee portal without any input-->
+        <!--<button onclick="getEmployee(), location.href='employeePortal.html'">Submit</button> -->
+        <button onclick="getEmployee()">Submit</button>
+        
+        <br>
+        <br>
+        <h4>Don't have an account? Sign up here</h4><br>
+        <button>Create Account</button>
+    </div>
+
+
+</body>
+
+<script>
+
+    let employee;
+    //employee.addEventListener("input", )
+    //documment.getElementById("ename").addEventListener("input", )
+
+    function getEmployee() {
+        console.log("getting employee");
+        
+        let ename = document.getElementById("ename").value;
+        
+        console.log(ename);
+
+        let xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if(this.readyState == 4 & this.status == 200) {
+                console.log(this.response);
+
+                employee = JSON.parse(this.response);
+                //populateResult(employee);
+                console.log(employee);
+            }
+     
+        };
+
+        url = `http://localhost:7000/employees/search?name=${ename}`;
+        xhr.open("GET", url, false);
+
+        xhr.send();
+        if(xhr.readyState == 4 & JSON.stringify(employee) != "{}") {
+            let data = "";
+            localStorage.setItem("employee", employee.name);
+            console.log("loading portal");
+            data = localStorage.getItem("employee");
+            console.log(data);
+            loadPage('employeePortal.html');
+        }
+        
+    }
+
+    function populateResult(employee) {
+        let result = document.getElementById("result");
+        result.innerHTML = '';
+
+        let idNode = document.createElement(h3)
+    }
+
+    function loadPage(href) {
+        // let xhr = new XMLHttpRequest();
+        // xhr.open("GET", href, true);
+        // xhr.send();
+        // return xhr.responseText;
+        location.href=href;
+    }
+
+
+</script>
+
+</html>

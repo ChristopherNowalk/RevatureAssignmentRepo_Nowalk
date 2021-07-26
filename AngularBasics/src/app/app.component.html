@@ -1,0 +1,67 @@
+New Text!!!!!!
+
+<h1>This is the Root component</h1>
+<h3>This is the first component bootstrapped in our index.html file</h3>
+
+<h4>I say {{hello}}</h4>
+
+<!-- Data Bindings -->
+
+<button (click)="testFunction()">Update Hello</button>
+<button (click)="saySomething()">Say Someting Different</button>
+
+<hr>
+
+<div>
+  <a [href]="website">{{website}}</a>
+  <button (click)="changeWebsite()">Change Website</button>
+</div>
+
+<hr>
+
+<input type="text" [(ngModel)]="url" (change)="setEndpoint()">
+<a [href]="endpoint">{{url}}</a><br>
+<button (click)="setUrl()">Set to Google</button>
+
+<hr>
+
+<!-- Directives -->
+<button (click)="toggleText()">Toggle Paragraph Text</button><br>
+<p *ngIf="showParagraph">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor 
+  in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt 
+  in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+
+
+<div>
+
+  <table>
+    <tr>
+      <th>Character No.</th>
+      <th>SSBM Character</th>
+    </tr>
+   <tr *ngFor="let character of superSmashCharacters">
+      <td>{{superSmashCharacters.indexOf(character) + 1}}</td>
+      <td appHighlighted>{{character}}</td>
+      <td><button (click)="deleteCharacter(character)">Delete</button></td>
+      
+   </tr>
+</table>
+
+<input type="text" [(ngModel)]="newCharacter">
+<button (click)="addCharacter()">Add Character</button>
+<button (click)="clearText()">Clear Text</button>
+<button (click)="removeCharacter()">Remove Last Character</button>
+<button (click)="clearAll()">Clear All</button>
+<br><span style="color: red;" *ngIf="showError">Character already in list!</span>
+
+<hr>
+
+<div>
+  <app-second></app-second>
+  <app-third></app-third>
+</div>
+
+</div>

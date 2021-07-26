@@ -136,6 +136,7 @@ public class UserRepoDBImpl implements UserRepo {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			//System.out.println("No user with that ID exists");
 		}
 		return null;
 	}

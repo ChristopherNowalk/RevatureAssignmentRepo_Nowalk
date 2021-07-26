@@ -25,7 +25,7 @@ public interface UserServices {
 	//Here we can create and delete accounts from each user
 	//I don't want to be able to make a random account that could possibly not be linked to a user, so the user services will have
 	//add account/delete account/ money transfer methods that will call the Account services layer
-	public Account addAccountToUser(Account a, int userId);
+	//public Account addAccountToUser(Account a);
 	
 	public Account deleteAccountFromUser(int id, int userId);
 	
@@ -34,5 +34,13 @@ public interface UserServices {
 	public Account addFunds(int id, int userId, double amount);
 	
 	public Account transferFunds(int takeId, int putId, int userId, double amount);
+	
+	public List<Account> getAllAccounts();
+	
+	public Account getAccountById(int id);
+	
+	public Account getAccountFromUser(int id ,int userId);
+	
+	public List<Account> getAllAccountsByUserId(int userId);
 	
 }

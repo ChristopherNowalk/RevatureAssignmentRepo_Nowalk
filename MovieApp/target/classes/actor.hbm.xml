@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<!-- Any attributes here apply to the actual SQL table. If you don't include them,
+	then the name will be assumed based on the field name in the Class -->
+	<class name="dev.nowalk.models.Actor" table="actors">
+	
+		<!-- 'name' attribute corresponds to the Java field name. 'type' will let Hibernate know what to
+		convert the SQL type into for Java. 'column' is to specify a column name in the SQL table -->
+		
+	 	<!-- id tag is for your Primary Key -->
+		<id name="id" type="int" column="a_id">
+			<generator class="identity" />
+		</id>
+		
+		<property name="name" type="string" not-null="true" />
+		<property name="age" type="int" />
+		<property name="worth" type="int" />
+		
+	</class>
+</hibernate-mapping>

@@ -18,7 +18,7 @@ public class RepoDBTest {
 //		System.out.println(ur.getAllUsers());
 //		System.out.println(ur.getAllUsers());
 //		
-//		User u2 = new User("Chris Nowalk", 2);
+		//User u2 = new User("Chris Nowalk", 2);
 //		System.out.println(ur.addUser(u2));
 //		
 //		

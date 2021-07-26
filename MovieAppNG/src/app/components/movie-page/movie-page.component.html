@@ -1,0 +1,38 @@
+<h3>Movie Database</h3>
+
+<p>
+    Feature under construction...
+</p>
+
+<div id="inputDiv">
+    <label for="titleInput">Title:</label>
+    <input type="text" [(ngModel)]="title" id="titleInput">
+    <label for="priceInput">Price:</label>
+    <input type="text" [(ngModel)]="price" id="priceInput">
+    <label for="availableInput">Available:</label>
+    <input type="radio" [(ngModel)]="available" id="availableInput" checked>
+    <label>Yes</label>
+    <input type="radio" [(ngModel)]="available" id="availableInput">
+    <label>No</label>
+    <button (click)="addMovie()">Add Movie</button>
+
+</div>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Available</th>
+        <th>Return Date</th>
+    </tr>
+    <tr *ngFor = "let movie of movieList">
+        <td>{{movie.id}}</td>
+        <td>{{movie.title}}</td>
+        <td>{{movie.price}}</td>
+        <td>{{movie.available}}</td>
+        <td>{{movie.returnDate}}</td>
+    </tr>
+</table>
+
+<button (click)="displayAllMovies()">Get Movies</button>

@@ -1,0 +1,9 @@
+
+<input type="number" [(ngModel)]="money">
+
+<h4>{{money | currency: 'EUR'}}</h4>
+
+<input type="number" [(ngModel)] = "time">
+<h4>{{time | date: 'full'}}</h4>
+
+<h4>{{currentTime | date: 'EEEE, MMMM, d, y, h:mm:ss:SSS a zzzz'}}</h4>

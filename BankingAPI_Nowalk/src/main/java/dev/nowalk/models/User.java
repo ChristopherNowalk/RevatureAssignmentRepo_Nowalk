@@ -20,11 +20,11 @@ public class User {
 		this.numOfAccounts = numOfAccounts;
 	}
 	//id less constructor, don't know if I will be using this one, but it might be nice to have
-	public User(String name, int numOfAccounts) {
-		super();
-		this.name = name;
-		this.numOfAccounts = numOfAccounts;
-	}
+//	public User(String name, int numOfAccounts) {
+//		super();
+//		this.name = name;
+//		this.numOfAccounts = numOfAccounts;
+//	}
 
 	//getters and setters
 	public int getId() {

@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
     <typeInfo handle="=MovieApp/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.services{MovieService.java[MovieService" modifiers="513" timestamp="1625156081318"/>
-    <typeInfo handle="=MovieApp/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.repositories{MovieRepo.java[MovieRepo" modifiers="513" timestamp="1625089780077"/>
-    <typeInfo handle="=BankingAPI_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.services{UserServices.java[UserServices" modifiers="513" timestamp="1625617232235"/>
-    <typeInfo handle="=BankingAPI_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.services{AccountServices.java[AccountServices" modifiers="513" timestamp="1625516533639"/>
+    <typeInfo handle="=BankingAPI_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.services{UserServices.java[UserServices" modifiers="513" timestamp="1626030729915"/>
+    <typeInfo handle="=BankingAPI_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.services{AccountServices.java[AccountServices" modifiers="513" timestamp="1626053047235"/>
     <typeInfo handle="=BankingAPI_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.repositories{UserRepo.java[UserRepo" modifiers="513" timestamp="1625511327578"/>
-    <typeInfo handle="=BankingAPI_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.repositories{AccountRepo.java[AccountRepo" modifiers="513" timestamp="1625675153647"/>
+    <typeInfo handle="=BankingAPI_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.repositories{AccountRepo.java[AccountRepo" modifiers="513" timestamp="1626030668172"/>
+    <typeInfo handle="=MovieApp/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.repositories{ActorRepo.java[ActorRepo" modifiers="513" timestamp="1626194009456"/>
+    <typeInfo handle="=MovieApp/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.repositories{MovieRepo.java[MovieRepo" modifiers="513" timestamp="1625089780077"/>
+    <typeInfo handle="=MovieApp/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.repositories{AwardRepo.java[AwardRepo" modifiers="513" timestamp="1626289870986"/>
+    <typeInfo handle="=TRMS_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.repositories{EmployeeRepo.java[EmployeeRepo" modifiers="513" timestamp="1627006405988"/>
+    <typeInfo handle="=TRMS_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.repositories{DepartmentRepo.java[DepartmentRepo" modifiers="513" timestamp="1626715248451"/>
+    <typeInfo handle="=TRMS_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.services{EmployeeServices.java[EmployeeServices" modifiers="513" timestamp="1627085326849"/>
+    <typeInfo handle="=TRMS_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.services{DepartmentServices.java[DepartmentServices" modifiers="513" timestamp="1626715175719"/>
+    <typeInfo handle="=TRMS_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.repositories{RequestRepo.java[RequestRepo" modifiers="513" timestamp="1627004314202"/>
+    <typeInfo handle="=TRMS_Nowalk/C:\/Users\/cjyes\/.m2\/repository\/org\/eclipse\/jetty\/jetty-server\/9.4.39.v20210325\/jetty-server-9.4.39.v20210325.jar=/maven.pomderived=/true=/=/maven.pomderived=/true=/=/maven.groupId=/org.eclipse.jetty=/=/maven.artifactId=/jetty-server=/=/maven.version=/9.4.39.v20210325=/=/maven.scope=/compile=/&lt;org.eclipse.jetty.server(RequestLog.class[RequestLog" modifiers="1537" timestamp="1625070962805"/>
+    <typeInfo handle="=TRMS_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.services{RequestServices.java[RequestServices" modifiers="513" timestamp="1627164179722"/>
+    <typeInfo handle="=TRMS_Nowalk/C:\/Users\/cjyes\/.m2\/repository\/io\/javalin\/javalin\/3.13.6\/javalin-3.13.6.jar=/maven.pomderived=/true=/=/maven.pomderived=/true=/=/maven.groupId=/io.javalin=/=/maven.artifactId=/javalin=/=/maven.version=/3.13.6=/=/maven.scope=/compile=/&lt;io.javalin.http(RequestLogger.class[RequestLogger" modifiers="1537" timestamp="1625070962776"/>
+    <typeInfo handle="=TRMS_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.repositories{EventTypeRepo.java[EventTypeRepo" modifiers="513" timestamp="1626832183717"/>
+    <typeInfo handle="=TRMS_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.services{EventTypeServices.java[EventTypeServices" modifiers="513" timestamp="1626834780150"/>
+    <typeInfo handle="=TRMS_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.repositories{EventRepo.java[EventRepo" modifiers="513" timestamp="1626836061193"/>
+    <typeInfo handle="=TRMS_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.services{EventServices.java[EventServices" modifiers="513" timestamp="1627051226438"/>
+    <typeInfo handle="=TRMS_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.repositories{GradingFormatRepo.java[GradingFormatRepo" modifiers="513" timestamp="1626916731732"/>
+    <typeInfo handle="=TRMS_Nowalk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dev.nowalk.services{GradingFormatServices.java[GradingFormatServices" modifiers="513" timestamp="1626917329486"/>
 </typeInfoHistroy>

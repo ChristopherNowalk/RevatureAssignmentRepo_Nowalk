@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Actor Adder</title>
+
+    <style>
+        #addForm {
+            margin: 25px;
+            width: 75%;
+            background-color: bisque;
+            padding: 10px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+     <!--To get the nice formatting we want then we should look at the bootstrap forms, we can change it to make it look very nice-->
+    <div id="addForm">
+        <label>Actor Name</label>
+        <input type="text" id="name"><br>
+
+        <label>Age</label>
+        <input type="number" id="age"><br>
+
+        <label>Worth</label>>
+        <input type="number" id="worth"><br>
+
+        <button onclick="addActor()">Add Actor</button>
+        <p id="success"></p>
+    </div>
+</body>
+
+<script>
+
+    let age = document.getElementById("age");
+    age.oninput = () => {
+
+        console.log(age.value);
+
+        if(age.value > 999) {
+            age.value = 999
+        } else if(age.value < 0 || age.value == "-") {
+            age.value = 0;
+        }
+    }
+
+    let worth = document.getElementById("worth");
+    worth.oninput = () => {
+
+        if(worth.value < 0 || worth.value == "-") {
+            worth.value = 0;
+        } else if(worth.value > 1000000000) {
+            worth.value = 1000000000;
+        }
+
+    }
+
+    function addActor() {
+
+        console.log("Adding Actor");
+
+        let nameValue = document.getElementById("name").value;
+        let ageValue = document.getElementById("age").value;
+        let worthValue = document.getElementById("worth").value;
+
+        let xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function() {
+
+            if(this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+
+                if(JSON.parse(this.responseText)) {
+                    document.getElementById("success").innerHTML = "Actor successfully added!";
+                } else {
+                    document.getElementById("success").innerHTML = "Actor was not added!";
+                }
+            } else if(this.readyState == 4) {
+                document.getElementById("success").innerHTML = "Request was not successfully processed!";
+            }
+        }
+
+        let url = "http://localhost:7000/actors";
+        xhttp.open("POST", url, true);
+
+        //step 3.5
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        //whatever you put in this object NEEDS to match what is in the java object you want it to be translated to
+        let actor = {
+            name: nameValue,
+            age: ageValue,
+            worth: worthValue
+        }
+
+        //the optional argument in the send() method allows us to provide a body for our request.
+        //we use JSON stringify to convert that actor object into a JSON string
+        xhttp.send(JSON.stringify(actor));
+
+    }
+
+
+</script>
+
+</html>

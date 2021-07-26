@@ -2,10 +2,10 @@ package dev.nowalk.models;
 
 public class Account {
 	//fields for our account object, may add more when needed
-	private int id;
+	private int a_id;
 	private String type;
 	private double balance;
-	private int userId;
+	private int user_Id;
 	
 	//no args constructor
 	public Account() {
@@ -15,27 +15,27 @@ public class Account {
 	//all args constructor
 	public Account(int id, String type, double balance, int userId) {
 		super();
-		this.id = id;
+		this.a_id = id;
 		this.type = type;
 		this.balance = balance;
-		this.userId = userId;
+		this.user_Id = userId;
 	}
 	
 	//id less constructor if we need it
-	public Account(String type, double balance, int userId) {
-		super();
-		this.type = type;
-		this.balance = balance;
-		this.userId = userId;
-	}
+//	public Account(String type, double balance, int userId) {
+//		super();
+//		this.type = type;
+//		this.balance = balance;
+//		this.userId = userId;
+//	}
 	
 	//getters and setters
 	public int getId() {
-		return id;
+		return a_id;
 	}
 	
 	public void setId(int id) {
-		this.id = id;
+		this.a_id = id;
 	}
 	
 	public String getType() {
@@ -55,17 +55,17 @@ public class Account {
 	}
 
 	public int getUserId() {
-		return userId;
+		return user_Id;
 	}
 	
 	public void setUserId(int userId) {
-		this.userId = userId;
+		this.user_Id = userId;
 	}
 	
 	//overridden toString method
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", type=" + type + ", balance=" + balance + ", userId=]" + userId + "]";
+		return "Account [id=" + a_id + ", type=" + type + ", balance=" + balance + ", user_Id=]" + user_Id + "]";
 	}
 	
 	

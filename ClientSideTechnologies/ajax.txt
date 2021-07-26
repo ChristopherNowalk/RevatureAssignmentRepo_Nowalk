@@ -1,0 +1,83 @@
+
+AJAX - Asynchronous JavaScript and XML
+
+    -Used to update a webpage without refreshing it.
+
+    -Using Asynchronous operations we can allow our application to still function while this async operation is executing 'in the background'
+    -Creates a smoother user experience.
+
+-Asynchronous - Not synchronized
+    -which means the tasks are not necessarily in sequential order.
+    -a task will be removed from the Call Stack while it is being processed by another web API, such as AJAX, and will return to the 
+    Call Stack when that processing is complete.
+        -Meanwhile, while it is being processed by that Web API, our JavaScript application can move on to other tasks.
+
+        
+
+    * Note: Asynchronous does NOT mean the same thing as Multi-threading.
+    * JavaScript is a Single-Threaded language 
+        -JS can only execute one task (thread) at a time.
+
+
+-One of the main reasons WE are going to use AJAX in this training is to utilize the XMLHttpRequest Object (recognized by all* modern browsers) to make HTTP Requests.
+    -Setting up and Sending HTTP Requests
+    -Processing HTTP Responses.
+
+
+-----------------------------------------------------------------------------
+
+Steps for making an HTTP Call using AJAX:
+
+1. Make an XMLHttpRequest Object
+
+    - let xhttp = new XMLHttpRequest();
+
+2. Define a function to execute when certain conditions from the request have been met.
+    - This function will be the action fired for the 'onreadystatechange' event listener.
+
+    xhttp.onreadystatechange = () => {
+
+        if(conditions) {
+            code; //Code to process the response.
+        }
+        
+    }
+
+3. Open the Requests
+
+    - xhttp.open(http method, url, async?);
+
+3.5 Set Request Headers //dont always have to do this, thats why its step 3.5
+
+    - xhttp.setRequestHeaders('headerName', 'headerValue');
+    //this might be a common one below
+    - xhttp.setRequestHeaders('Content_Type', 'application/json');
+
+4. Send the Request
+
+    - xhttp.send(optional: body);
+
+4.5 Successful Responses
+
+    - execute code in step 2.
+
+
+-------------------------------------------------------------------------------
+
+Two conditions we want to check for:
+
+    - readyState
+    - HTTP Status Code
+
+
+readyState - gives information on the status of your request.
+
+0 - Unsent - (technically also unopened)
+1 - Open - called the open() but has not actually sent the request yet.
+2 - Headers Recieved - send() has been called and the headers have been recieved by the server.
+3 - Loading - downloading the response from XMLHttpRequest
+4 - Done
+
+Most commonly, we care about when the readyState == 4
+
+Most commonly, we care about getting an HTTP Status Code: 200 OK (status == 200)

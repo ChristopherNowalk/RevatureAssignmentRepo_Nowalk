@@ -1,12 +1,35 @@
 package dev.nowalk.models;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 //this is our data layer (we make our models here to represent our data)
+//entity makrs a class as an entity by Hibernate and a table will be associated with it
+@Entity
+//table allows us to add more information to our table, but table doesnt mark this for a table representation in our DB
+@Table(name="movies")
 public class Movie {
 	
 	//field used to identify our objects with a unique identifier
+	@Id
+	@Column(name="m_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(name="title", nullable=false)
 	private String title;
+	
+	@Column(name="price")
 	private double price;
+	
+	@Column(name="available", columnDefinition="boolean")
 	private boolean available;
+	
+	@Column(name="return_date")
 	private long returnDate;
 	
 	//no arguments constructor

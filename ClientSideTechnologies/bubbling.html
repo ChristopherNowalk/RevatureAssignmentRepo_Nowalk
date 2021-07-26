@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bubbling vs Capturing</title>
+</head>
+
+<body id="body">
+    
+    <span id="span">
+        <h1 id="h1">Sample Text</h1>
+    </span>
+
+</body>
+
+<script>
+
+    document.getElementById("body").addEventListener("click", () => { console.log("body")}, false);
+    document.getElementById("span").addEventListener("click", () => { console.log("span")}, true);
+    document.getElementById("h1").addEventListener("click", () => { console.log("h1")}, false );
+
+</script>
+
+</html>

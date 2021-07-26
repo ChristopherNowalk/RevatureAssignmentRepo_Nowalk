@@ -8,23 +8,23 @@ public interface AccountServices {
 
 	//the services associated with accounts
 	
-	public Account AddAccount();
+	public Account addAccount(Account a, int userId);
 	
-	public List<Account> GetAllAccounts();
+	public List<Account> getAllAccounts();
 	
-	public Account GetAccount();
+	public Account getAccount(int a_id);
 	
-	public Account UpdateAccount();
+	public Account updateAccount(Account change);
 	
-	public Account DeleteAccount();
+	public Account deleteAccount(int a_id, int u_id);
 	
 	//more account services to come once i think of them
 	//also i might change the Account return type, not sure if i really need it here
 	
-	public Account WithdrawFunds();
+	public Account withdrawFunds(Account a, double amount);
 	
-	public Account AddFunds();
+	public Account addFunds(Account a, double amount);
 	
-	public Account TransferFunds();
+	public Account transferFunds();
 	
 }
